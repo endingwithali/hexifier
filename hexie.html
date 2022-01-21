@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&family=Staatliches&display=swap" rel="stylesheet">
+    <title>Hexify me daddy!</title>
+    <link rel="stylesheet" href="hexie.css">
+
+  </head>
+  <body>
+  
+<div class="container">
+    <div>
+        <h1>Hexifier</h1>
+        <h2>Select your image, and get hexified</h2>
+    </div>
+    
+    <br/>
+    <div><input type="file" id="image-input" accept=".png, .jpg, .jpeg"/></div>
+    <br/>
+    <button id="submit">⬣ get hexed ⬣</button>
+    <br/>
+    <div><canvas id="canvas" width="400" height="400"></canvas></div>
+    <p1>Select your image (.png, .jpg, .jpeg only), click '⬣ get hexed ⬣', and see your image become wrapped</p1>
+    <p1>To use the image, right click, save as, and upload that new image to Twitter</p1>
+    <p1><b>The image you hexify will be shrunk to 400x400, so bring an image that is a square</b></p1>
+</div>
+  
+<script>
+  
+    $(document).ready(function(){
+        $('#submit').click(() =>{
+            let imageInput = document.getElementById("image-input");
+            console.log(imageInput.files)
+
+            if (imageInput.value) {
+                
+                var mask = document.createElement('IMG');
+                mask.src="./hexi.png"
+
+                var img = document.createElement('IMG');
+                img.src = URL.createObjectURL(imageInput.files[0])
+
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext('2d');
+
+                var hRatio = canvas.width  / img.width    ;
+                var vRatio =  canvas.height / img.height  ;
+                var ratio  = Math.min ( hRatio, vRatio );
+                var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+                var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+
+                img.onload = function () {
+                    ctx.drawImage(mask, 0, 0, 400,400);
+                    ctx.globalCompositeOperation = 'source-out';
+                    ctx.drawImage(img, 0, 0, 400, 400);
+                }
+            }
+        });
+    });
+  
+</script>
+  
+</body>
+</html>
+
+
+<!-- 
+    Credits:
+    - https://techfunda.com/howto/1075/image-masking-on-canvas
+    - https://stackoverflow.com/questions/18379818/canvas-image-masking-overlapping
+    - https://stackoverflow.com/questions/23104582/scaling-an-image-to-fit-on-canvas
+-->

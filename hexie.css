@@ -1,0 +1,37 @@
+h1{
+    font-family: 'Staatliches', cursive;
+    font-size: 250px;
+    text-align:center;
+    background-color: #1DA1F2;
+    color:white;
+    padding-left:80px;
+    padding-right:80px;
+
+}
+h2{
+    margin-top:20px;
+    font-family: 'Roboto Mono', monospace;
+    font-size:30px;
+    text-align:center;
+}
+
+p{
+    font-family: 'Roboto Mono', monospace;
+    font-size:20px;
+    text-align:center;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top:20px
+}
+
+#submit{
+    font-size: 20px;
+    margin: 10px;
+}
+/* div{
+    display: flex;
+} */
