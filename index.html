@@ -41,7 +41,7 @@
             if (imageInput.value) {
                 
                 var mask = document.createElement('IMG');
-                mask.src="./hexi.png"
+                mask.src="https://hex.ali.dev/hexi.png"
 
                 var img = document.createElement('IMG');
                 img.src = URL.createObjectURL(imageInput.files[0])
@@ -49,10 +49,12 @@
                 var canvas = document.getElementById("canvas");
                 var ctx = canvas.getContext('2d');
 
-                img.onload = function () {
-                    ctx.drawImage(mask, 0, 0, 400,400);
-                    ctx.globalCompositeOperation = 'source-out';
-                    ctx.drawImage(img, 0, 0, 400, 400);
+                mask.onload = function(){
+                    img.onload = function () {
+                        ctx.drawImage(mask, 0, 0, 400,400);
+                        ctx.globalCompositeOperation = 'source-out';
+                        ctx.drawImage(img, 0, 0, 400, 400);
+                    }
                 }
             }
         });
