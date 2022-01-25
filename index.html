@@ -49,13 +49,10 @@
                 var canvas = document.getElementById("canvas");
                 var ctx = canvas.getContext('2d');
 
-                mask.onload = function(){
-                    img.onload = function () {
-                        ctx.drawImage(mask, 0, 0, 400,400);
-                        ctx.globalCompositeOperation = 'source-out';
-                        ctx.drawImage(img, 0, 0, 400, 400);
-                    }
-                }
+
+                ctx.drawImage(mask, 0, 0, 400,400);
+                ctx.globalCompositeOperation = 'source-out';
+                ctx.drawImage(img, 0, 0, 400, 400);
             }
         });
     });
