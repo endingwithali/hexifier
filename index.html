@@ -30,6 +30,7 @@
     <p1>Select your image (.png, .jpg, .jpeg only), click '⬣ get hexed ⬣', and see your image become wrapped</p1>
     <p1>To use the image, right click, save as, and upload that new image to Twitter</p1>
     <p1><b>The image you hexify will be shrunk to 400x400, so bring an image that is a square</b></p1>
+    <button id="download">download</button>
 </div>
   
 <script>
@@ -41,9 +42,11 @@
             if (imageInput.value) {
                 
                 var mask = document.createElement('IMG');
-                mask.src="https://hex.ali.dev/hexi.png"
+                mask.crossOrigin = 'anonymous';
+                mask.src = 'https://hex.ali.dev/hexi.png';
 
                 var img = document.createElement('IMG');
+                img.crossOrigin = 'anonymous';
                 img.src = URL.createObjectURL(imageInput.files[0])
 
                 var canvas = document.getElementById("canvas");
@@ -57,6 +60,15 @@
                     }
                 }
             }
+        });
+
+        $('#download').on('click', function() {
+            var canvas = document.getElementById('canvas');
+            image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+            var link = document.createElement('a');
+            link.download = "hex.png";
+            link.href = image;
+            link.click();
         });
     });
   
